@@ -1,0 +1,32 @@
+.sidebar {
+  width: 200px;
+  background-color: #282c34;
+  color: white;
+  min-height: 100vh;
+  transition: width 0.3s;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.sidebar .toggle-btn {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebar li span {
+  margin-left: 10px;
+}
