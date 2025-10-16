@@ -1,10 +1,214 @@
-.order-table {
-  width: 100%;
-  border-collapse: collapse;
+/* Manage Orders Container */
+.manage-orders-container {
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-.order-table th, .order-table td {
-  border: 1px solid #ccc;
-  padding: 8px;
-  text-align: left;
+/* Page Header */
+.page-header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #e0e6ed;
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1e3c72;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  color: #6c757d;
+  font-size: 15px;
+  margin: 0;
+}
+
+/* Custom Alert */
+.custom-alert {
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-weight: 500;
+}
+
+/* Filter Card */
+.filter-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 25px;
+  border: 1px solid #e0e6ed;
+}
+
+.filter-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.filter-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+}
+
+.filter-input {
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  padding: 10px 15px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.filter-input:focus {
+  border-color: #2a5298;
+  box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+  outline: none;
+}
+
+/* Table Card */
+.table-card {
+  background: white;
+  padding: 0;
+  border-radius: 15px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  border: 1px solid #e0e6ed;
+}
+
+/* Modern Table */
+.modern-table {
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.modern-table thead {
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.modern-table thead th {
+  color: white;
+  font-weight: 600;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 18px 15px;
+  border: none;
+  white-space: nowrap;
+}
+
+.modern-table tbody tr {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid #f0f2f5;
+}
+
+.modern-table tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.modern-table tbody td {
+  padding: 15px;
+  vertical-align: middle;
+  border: none;
+  color: #495057;
+}
+
+.order-id {
+  font-weight: 700;
+  color: #1e3c72;
+  font-size: 15px;
+}
+
+.customer-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.price-cell {
+  font-weight: 700;
+  color: #28a745;
+  font-size: 15px;
+}
+
+/* Action Buttons */
+.action-btn {
+  border-radius: 8px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-width: 2px;
+}
+
+.view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
+}
+
+.delete-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.delete-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Custom Checkbox */
+.custom-checkbox input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.custom-checkbox input[type="checkbox"]:checked {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .page-title {
+    font-size: 28px;
+  }
+  
+  .filter-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 24px;
+  }
+  
+  .modern-table {
+    font-size: 12px;
+  }
+  
+  .modern-table thead th {
+    padding: 12px 8px;
+    font-size: 11px;
+  }
+  
+  .modern-table tbody td {
+    padding: 10px 8px;
+  }
+  
+  .action-btn {
+    padding: 4px 12px;
+    font-size: 12px;
+  }
 }

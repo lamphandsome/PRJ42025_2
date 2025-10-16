@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import CreateOrder from './components/CreateOrder';
 import ManageOrders from './components/ManageOrders';
@@ -14,9 +14,14 @@ import UserOrders from "./components/UserOrders";
 const App = () => {
     return (
         <Router>
-            <div style={{display: 'flex'}}>
+            <div style={{display: 'flex', minHeight: '100vh', background: '#f5f7fa'}}>
                 <Sidebar/>
-                <div style={{marginLeft: "230px", padding: "20px", width: "100%"}}>
+                <div style={{
+                    marginLeft: "260px", 
+                     
+                    width: "100%",
+                    minHeight: '100vh'
+                }}>
                     <Routes>
                         {/* Public routes */}
                         <Route path="/login" element={<Login/>}/>

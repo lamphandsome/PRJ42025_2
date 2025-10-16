@@ -4,6 +4,7 @@ import orderService from '../services/orderService';
 import InvoiceModal from './InvoiceModal';
 import ConfirmModal from './ConfirmModal';
 import ConfirmDeleteModal from './ConfirmDeleteModal';
+import './ManageOrders.css';
 
 function ManageOrders() {
   const [orders, setOrders] = useState([]);
@@ -93,104 +94,118 @@ function ManageOrders() {
   });
 
   return (
-    <Container className="mt-4">
-      <h2 className="mb-4">Quản Lý Đơn Hàng</h2>
+    <Container fluid className="manage-orders-container">
+      <div className="page-header">
+        <h2 className="page-title">Quản Lý Đơn Hàng</h2>
+        <p className="page-subtitle">Theo dõi và quản lý tất cả đơn hàng giặt ủi</p>
+      </div>
 
       {alertMessage && (
-        <Alert variant="success" onClose={() => setAlertMessage('')} dismissible>
+        <Alert variant="success" onClose={() => setAlertMessage('')} dismissible className="custom-alert">
           {alertMessage}
         </Alert>
       )}
 
       {/* Bộ lọc */}
-      <Form className="mb-3">
-        <Row className="g-3">
-          <Col md={3}>
-            <Form.Label>Hóa đơn số</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Nhập mã đơn"
-              value={filterId}
-              onChange={(e) => setFilterId(e.target.value)}
-            />
-          </Col>
-          <Col md={3}>
-            <Form.Label>Số điện thoại</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Nhập SĐT"
-              value={filterPhone}
-              onChange={(e) => setFilterPhone(e.target.value)}
-            />
-          </Col>
-          <Col md={3}>
-            <Form.Label>Trạng thái</Form.Label>
-            <Form.Select
-              value={filterStatus}
-              onChange={(e) => setFilterStatus(e.target.value)}
-            >
-              <option value="">Tất cả</option>
-              <option value="Đang Giặt">Đang Giặt</option>
-              <option value="Hoàn Tất">Hoàn Tất</option>
-            </Form.Select>
-          </Col>
-        </Row>
-      </Form>
+      <div className="filter-card">
+        <h5 className="filter-title">🔍 Bộ lọc tìm kiếm</h5>
+        <Form>
+          <Row className="g-3">
+            <Col md={4}>
+              <Form.Label className="filter-label">Hóa đơn số</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Nhập mã đơn..."
+                value={filterId}
+                onChange={(e) => setFilterId(e.target.value)}
+                className="filter-input"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label className="filter-label">Số điện thoại</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Nhập SĐT..."
+                value={filterPhone}
+                onChange={(e) => setFilterPhone(e.target.value)}
+                className="filter-input"
+              />
+            </Col>
+            <Col md={4}>
+              <Form.Label className="filter-label">Trạng thái</Form.Label>
+              <Form.Select
+                value={filterStatus}
+                onChange={(e) => setFilterStatus(e.target.value)}
+                className="filter-input"
+              >
+                <option value="">Tất cả</option>
+                <option value="Đang Giặt">Đang Giặt</option>
+                <option value="Hoàn Tất">Hoàn Tất</option>
+              </Form.Select>
+            </Col>
+          </Row>
+        </Form>
+      </div>
 
-      <Table striped bordered hover responsive>
-        <thead>
-          <tr>
-            <th>Hóa Đơn Số</th>
-            <th>Tên Khách Hàng</th>
-            <th>SĐT</th>
-            <th>Ngày Đặt</th>
-            <th>Trạng Thái</th>
-            <th>Giá Tiền</th>
-            <th>Chi Tiết</th>
-            <th>Hoàn Thành</th>
-            <th>Xoá</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredOrders.map((order) => (
-            <tr key={order.id}>
-              <td>#{order.id}</td>
-              <td>{order.customerName}</td>
-              <td>{order.customerPhone}</td>
-              <td>{new Date(order.orderDate).toLocaleDateString()}</td>
-              <td>{renderStatusBadge(order.status)}</td>
-              <td>{order.totalPrice.toLocaleString()} đ</td>
-              <td>
-                <Button
-                  variant="outline-primary"
-                  size="sm"
-                  onClick={() => handleViewInvoice(order)}
-                >
-                  👁 Xem
-                </Button>
-              </td>
-              <td>
-                <Form.Check
-                  type="checkbox"
-                  checked={order.status === 'Hoàn Tất'}
-                  disabled={order.status === 'Hoàn Tất'}
-                  onChange={() => handleConfirmFinish(order.id)}
-                />
-              </td>
-              <td>
-                <Button
-                  variant="outline-danger"
-                  size="sm"
-                  onClick={() => handleAskDelete(order.id)}
-                  disabled={order.status === 'Hoàn Tất'}
-                >
-                  🗑 Xoá
-                </Button>
-              </td>
+      <div className="table-card">
+        <Table hover responsive className="modern-table">
+          <thead>
+            <tr>
+              <th>Hóa Đơn Số</th>
+              <th>Tên Khách Hàng</th>
+              <th>SĐT</th>
+              <th>Ngày Đặt</th>
+              <th>Trạng Thái</th>
+              <th>Giá Tiền</th>
+              <th className="text-center">Chi Tiết</th>
+              <th className="text-center">Hoàn Thành</th>
+              <th className="text-center">Xoá</th>
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {filteredOrders.map((order) => (
+              <tr key={order.id}>
+                <td className="order-id">#{order.id}</td>
+                <td className="customer-name">{order.customerName}</td>
+                <td>{order.customerPhone}</td>
+                <td>{new Date(order.orderDate).toLocaleDateString('vi-VN')}</td>
+                <td>{renderStatusBadge(order.status)}</td>
+                <td className="price-cell">{order.totalPrice.toLocaleString()} đ</td>
+                <td className="text-center">
+                  <Button
+                    variant="outline-primary"
+                    size="sm"
+                    onClick={() => handleViewInvoice(order)}
+                    className="action-btn view-btn"
+                  >
+                    👁 Xem
+                  </Button>
+                </td>
+                <td className="text-center">
+                  <Form.Check
+                    type="checkbox"
+                    checked={order.status === 'Hoàn Tất'}
+                    disabled={order.status === 'Hoàn Tất'}
+                    onChange={() => handleConfirmFinish(order.id)}
+                    className="custom-checkbox"
+                  />
+                </td>
+                <td className="text-center">
+                  <Button
+                    variant="outline-danger"
+                    size="sm"
+                    onClick={() => handleAskDelete(order.id)}
+                    disabled={order.status === 'Hoàn Tất'}
+                    className="action-btn delete-btn"
+                  >
+                    🗑 Xoá
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </div>
 
       {showInvoiceModal && selectedOrder && (
         <InvoiceModal

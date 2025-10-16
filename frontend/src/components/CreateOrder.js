@@ -114,143 +114,177 @@ const CreateOrder = () => {
   };
 
   return (
-      <Container className="mt-4">
-        <h2>Tạo Đơn Giặt</h2>
+      <Container fluid className="create-order-container">
+        <div className="page-header">
+          <h2 className="page-title">Tạo Đơn Giặt Mới</h2>
+          <p className="page-subtitle">Nhập thông tin chi tiết đơn hàng giặt ủi</p>
+        </div>
 
-        {alertMessage && <Alert variant={alertVariant}>{alertMessage}</Alert>}
+        {alertMessage && <Alert variant={alertVariant} className="custom-alert">{alertMessage}</Alert>}
 
-        <Form>
-          <Row>
-            <Col>
-              <Form.Group controlId="customerName">
-                <Form.Label>Tên Khách Hàng</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={customer.name}
-                    onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
-                />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="customerPhone">
-                <Form.Label>Số Điện Thoại</Form.Label>
-                <Form.Control
-                    type="text"
-                    value={customer.phone}
-                    onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
+        <div className="form-card">
+          <Form>
+            <div className="section-header">
+              <h5 className="section-title">👤 Thông tin khách hàng</h5>
+            </div>
+            <Row className="mb-4">
+              <Col md={6}>
+                <Form.Group controlId="customerName">
+                  <Form.Label className="form-label">Tên Khách Hàng</Form.Label>
+                  <Form.Control
+                      type="text"
+                      value={customer.name}
+                      onChange={(e) => setCustomer({ ...customer, name: e.target.value })}
+                      className="form-input"
+                      placeholder="Nhập tên khách hàng..."
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="customerPhone">
+                  <Form.Label className="form-label">Số Điện Thoại</Form.Label>
+                  <Form.Control
+                      type="text"
+                      value={customer.phone}
+                      onChange={(e) => setCustomer({ ...customer, phone: e.target.value })}
+                      className="form-input"
+                      placeholder="Nhập số điện thoại..."
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-          <Form.Group controlId="serviceType" className="mt-3">
-            <Form.Label>Loại Dịch Vụ</Form.Label>
-            <Form.Select
-                value={serviceType}
-                onChange={(e) => setServiceType(e.target.value)}
-            >
-              <option value="weight">Giặt Theo Cân</option>
-              <option value="quantity">Giặt Theo Số Lượng</option>
-              <option value="monthly">Giặt Theo Tháng</option>
-            </Form.Select>
-          </Form.Group>
+            <div className="section-header">
+              <h5 className="section-title">🧺 Thông tin dịch vụ</h5>
+            </div>
+            <Form.Group controlId="serviceType" className="mb-4">
+              <Form.Label className="form-label">Loại Dịch Vụ</Form.Label>
+              <Form.Select
+                  value={serviceType}
+                  onChange={(e) => setServiceType(e.target.value)}
+                  className="form-input"
+              >
+                <option value="weight">Giặt Theo Cân</option>
+                <option value="quantity">Giặt Theo Số Lượng</option>
+                <option value="monthly">Giặt Theo Tháng</option>
+              </Form.Select>
+            </Form.Group>
 
-          <h5 className="mt-4">Danh Sách Đồ</h5>
-          <Table bordered>
-            <thead>
-            <tr>
-              <th>Tên Món</th>
-              <th>Số Lượng</th>
-              <th>Hành Động</th>
-            </tr>
-            </thead>
-            <tbody>
-            {items.map((item, index) => (
-                <tr key={index}>
-                  <td>
-                    <Form.Select
-                        value={item.name}
-                        onChange={(e) => handleItemChange(index, 'name', e.target.value)}
-                    >
-                      <option value="">-- Chọn món --</option>
-                      {FIXED_ITEM_NAMES.map((opt, i) => (
-                          <option key={i} value={opt.value}>{opt.label}</option>
-                      ))}
-                    </Form.Select>
-                  </td>
-                  <td>
-                    <Form.Control
-                        type="number"
-                        value={item.quantity}
-                        onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
-                    />
-                  </td>
-                  <td>
-                    <Button
-                        variant="danger"
-                        size="sm"
-                        onClick={() => removeItem(index)}
-                        disabled={items.length === 1}
-                    >
-                      Xóa
-                    </Button>
-                  </td>
+            <div className="section-header">
+              <h5 className="section-title">📋 Danh Sách Đồ</h5>
+            </div>
+            <div className="table-wrapper">
+              <Table className="items-table">
+                <thead>
+                <tr>
+                  <th>Tên Món</th>
+                  <th>Số Lượng</th>
+                  <th className="text-center">Hành Động</th>
                 </tr>
-            ))}
-            </tbody>
-          </Table>
-          <Button variant="secondary" onClick={addItem}>+ Thêm Món</Button>
+                </thead>
+                <tbody>
+                {items.map((item, index) => (
+                    <tr key={index}>
+                      <td>
+                        <Form.Select
+                            value={item.name}
+                            onChange={(e) => handleItemChange(index, 'name', e.target.value)}
+                            className="form-input"
+                        >
+                          <option value="">-- Chọn món --</option>
+                          {FIXED_ITEM_NAMES.map((opt, i) => (
+                              <option key={i} value={opt.value}>{opt.label}</option>
+                          ))}
+                        </Form.Select>
+                      </td>
+                      <td>
+                        <Form.Control
+                            type="number"
+                            value={item.quantity}
+                            onChange={(e) => handleItemChange(index, 'quantity', e.target.value)}
+                            className="form-input"
+                        />
+                      </td>
+                      <td className="text-center">
+                        <Button
+                            variant="danger"
+                            size="sm"
+                            onClick={() => removeItem(index)}
+                            disabled={items.length === 1}
+                            className="delete-item-btn"
+                        >
+                          🗑 Xóa
+                        </Button>
+                      </td>
+                    </tr>
+                ))}
+                    </tbody>
+              </Table>
+              <Button variant="secondary" onClick={addItem} className="add-item-btn">
+                + Thêm Món
+              </Button>
+            </div>
 
-          <Form.Group className="mt-3">
-            <Form.Label>Tổng Cân Nặng (kg)</Form.Label>
-            <Form.Control
-                type="number"
-                value={weight}
-                onChange={(e) => setWeight(parseFloat(e.target.value))}
-            />
-          </Form.Group>
+            <Row className="mt-4">
+              <Col md={6}>
+                <Form.Group>
+                  <Form.Label className="form-label">Tổng Cân Nặng (kg)</Form.Label>
+                  <Form.Control
+                      type="number"
+                      value={weight}
+                      onChange={(e) => setWeight(parseFloat(e.target.value))}
+                      className="form-input"
+                      placeholder="Nhập tổng cân nặng..."
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
 
-          <Form.Group className="mt-3">
-            <Form.Label>Ghi chú đặc biệt (nếu có)</Form.Label>
-            <Form.Control
-                as="textarea"
-                rows={3}
-                value={note}
-                onChange={(e) => setNote(e.target.value)}
-                placeholder="Ví dụ: Giặt riêng áo phao, đồ dễ hỏng..."
-            />
-          </Form.Group>
+            <Form.Group className="mt-3">
+              <Form.Label className="form-label">Ghi chú đặc biệt (nếu có)</Form.Label>
+              <Form.Control
+                  as="textarea"
+                  rows={3}
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  placeholder="Ví dụ: Giặt riêng áo phao, đồ dễ hỏng..."
+                  className="form-input"
+              />
+            </Form.Group>
 
-          <div className="mt-4 d-flex gap-3">
-            <Button
-                variant="primary"
-                onClick={handlePreviewOrder}
-                disabled={loadingType === 'preview' || loadingType === 'save'}
-            >
-              {loadingType === 'preview' ? (
-                  <>
-                    <Spinner animation="border" size="sm" /> Đang tạo đơn...
-                  </>
-              ) : (
-                  'Tạo Đơn Hàng'
-              )}
-            </Button>
+            <div className="action-buttons mt-4">
+              <Button
+                  variant="primary"
+                  onClick={handlePreviewOrder}
+                  disabled={loadingType === 'preview' || loadingType === 'save'}
+                  className="preview-btn"
+              >
+                {loadingType === 'preview' ? (
+                    <>
+                      <Spinner animation="border" size="sm" /> Đang tạo đơn...
+                    </>
+                ) : (
+                    '👁 Tạo Đơn Hàng'
+                )}
+              </Button>
 
-            <Button
-                variant="success"
-                onClick={handleSaveOrder}
-                disabled={loadingType === 'save' || loadingType === 'preview'}
-            >
-              {loadingType === 'save' ? (
-                  <>
-                    <Spinner animation="border" size="sm" /> Đang lưu...
-                  </>
-              ) : (
-                  'Lưu Đơn Hàng'
-              )}
-            </Button>
-          </div>
-        </Form>
+              <Button
+                  variant="success"
+                  onClick={handleSaveOrder}
+                  disabled={loadingType === 'save' || loadingType === 'preview'}
+                  className="save-btn"
+              >
+                {loadingType === 'save' ? (
+                    <>
+                      <Spinner animation="border" size="sm" /> Đang lưu...
+                    </>
+                ) : (
+                    '💾 Lưu Đơn Hàng'
+                )}
+              </Button>
+            </div>
+          </Form>
+        </div>
 
         {showInvoice && createdOrder && (
             <InvoiceModal
